@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
-import { logEvents } from "../middlewares/logger";
 
 const Schema = mongoose.Schema;
 
@@ -31,16 +29,6 @@ const UserSchema = new Schema({
         required: true
     }
 });
-
-//encrypt the password using pre hook on all "save" actions
-UserSchema.pre("save", async function (next) {
-    logEvents("Encrypted user password on modification", "requestLog.log");
-    if (this.isModified(this.password)) {
-        this.password = await bcrypt.hash(this.password, 8);
-    }
-
-    next();
-})
 
 const User = mongoose.model<UserType>("User", UserSchema);
 

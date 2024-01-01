@@ -1,8 +1,9 @@
-import express, { NextFunction, Request, Response } from "express";
+import express, { Request, Response } from "express";
 import User from "../models/user";
 import jwt from "jsonwebtoken";
 import { check, validationResult } from "express-validator";
 import { logEvents } from "../middlewares/logger";
+import bcrypt from "bcryptjs";
 
 const router = express.Router();
 
@@ -32,7 +33,17 @@ router.post(
             }
 
             //save user to db
-            user = new User(req.body);
+            const { email, password, firstName, lastName } = req.body;
+
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(password, salt);
+
+            user = new User({
+                email,
+                password: hashedPassword,
+                firstName,
+                lastName
+            });
             await user.save();
 
             //create the jwt and send it back as an http cookie
@@ -49,7 +60,7 @@ router.post(
                 maxAge: 24 * 60 * 60 * 1000
             });
 
-            return res.sendStatus(200);
+            return res.sendStatus(201);
 
         } catch (error) {
             console.log(error);

@@ -3,6 +3,7 @@ import cors from 'cors';
 import "dotenv/config";
 import mongoose from 'mongoose';
 import userRoutes from "./routes/users";
+import authRoutes from "./routes/auth";
 import { logEvents, logger } from './middlewares/logger';
 import { connectDB } from './utils/dbConnection';
 const PORT = process.env.PORT || 8080;
@@ -18,6 +19,7 @@ app.use(cors());
 
 // endpoints
 app.use("/api/users", userRoutes)
+app.use("/api/auth", authRoutes)
 
 
 // successfull connection to mongoDB
