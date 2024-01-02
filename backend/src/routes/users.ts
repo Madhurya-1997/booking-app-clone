@@ -46,6 +46,8 @@ router.post(
             });
             await user.save();
 
+            logEvents(`Newly created user: ${req.path}\t${JSON.stringify(user)}`, "requestLog.log");
+
             //create the jwt and send it back as an http cookie
             const token = jwt.sign({
                 userId: user._id
@@ -60,7 +62,7 @@ router.post(
                 maxAge: 24 * 60 * 60 * 1000
             });
 
-            return res.sendStatus(201);
+            return res.status(201).json({ message: "User Registration Done!" });
 
         } catch (error) {
             console.log(error);

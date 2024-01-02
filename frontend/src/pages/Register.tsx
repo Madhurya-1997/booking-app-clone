@@ -2,22 +2,30 @@ import { useForm } from "react-hook-form"
 import { RegisterFormData } from "../types/RegisterFormData";
 import { useMutation } from "react-query";
 import * as apiClient from "../apiClient";
+import { useAppContext } from "../contexts/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
     const { register, watch, handleSubmit, formState } = useForm<RegisterFormData>();
     const { errors } = formState;
 
+    const { showToast } = useAppContext();
+
+    const navigate = useNavigate();
+
     const mutation = useMutation(apiClient.register, {
         onSuccess: () => {
-            console.log("Success")
+            showToast({ message: "Registration Successful!", type: "SUCCESS" })
+            navigate("/");
         },
         onError: (err: Error) => {
             console.log(err.message);
+            showToast({ message: err.message, type: "ERROR" })
         }
     });
 
     const registerAccount = handleSubmit((data) => {
-        //callback is called only when all fields in the form are valid 
+        //this callback is called only when all fields in the form are valid 
         mutation.mutate(data);
     })
 
