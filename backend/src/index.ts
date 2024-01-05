@@ -7,6 +7,7 @@ import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
 import { logEvents, logger } from './middlewares/logger';
 import { connectDB } from './utils/dbConnection';
+import path from 'path';
 const PORT = process.env.PORT || 8080;
 
 connectDB();
@@ -23,6 +24,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors(corsOptions));
 // app.use(logger);
+
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 // endpoints
 app.use("/api/users", userRoutes)
