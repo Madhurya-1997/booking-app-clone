@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  # MongoDB container
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  # Node.js/Express.js container
+  server:
+    build:
+      context: ./backend
+    container_name: booking-app-express-server
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/booking_app_db
+    depends_on:
+      - mongo
+
+  # React container
+  client:
+    build:
+      context: ./frontend
+    container_name: booking-app-ui-app
+    restart: always
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server
+
+volumes:
+  mongo-data:

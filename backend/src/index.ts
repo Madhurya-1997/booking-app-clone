@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import "dotenv/config";
 import mongoose from 'mongoose';
+import cookieParser from "cookie-parser";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
 import { logEvents, logger } from './middlewares/logger';
@@ -10,11 +11,17 @@ const PORT = process.env.PORT || 8080;
 
 connectDB();
 
+const corsOptions = {
+    origin: process.env.FRONTEND_BASE_URL, //only accept this base url
+    credentials: true //checking for http cookies
+}
+
 const app = express();
 
+app.use(cookieParser())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors(corsOptions));
 // app.use(logger);
 
 // endpoints
