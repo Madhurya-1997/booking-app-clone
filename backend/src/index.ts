@@ -5,11 +5,21 @@ import mongoose from 'mongoose';
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/users";
 import authRoutes from "./routes/auth";
+import myHotelRoutes from "./routes/my-hotels";
+import { v2 as cloudinary } from 'cloudinary';
 import { logEvents, logger } from './middlewares/logger';
 import { connectDB } from './utils/dbConnection';
 import path from 'path';
 const PORT = process.env.PORT || 8080;
 
+// configure cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// connect to mongodb
 connectDB();
 
 const corsOptions = {
@@ -30,6 +40,7 @@ app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 // endpoints
 app.use("/api/users", userRoutes)
 app.use("/api/auth", authRoutes)
+app.use("/api/my-hotels", myHotelRoutes)
 
 
 // successfull connection to mongoDB
