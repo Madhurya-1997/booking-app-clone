@@ -1,7 +1,8 @@
+import { HotelType } from "./types/HotelType";
 import { LoginFormData } from "./types/LoginFormData";
 import { RegisterFormData } from "./types/RegisterFormData"
 
-const API_BASE_URL = "http://localhost:8080/api" || '';
+const API_BASE_URL = "http://localhost:8081/api" || '';
 
 export const register = async (req: RegisterFormData) => {
     const response = await fetch(`${API_BASE_URL}/users/register`, {
@@ -77,4 +78,65 @@ export const logout = async () => {
     if (!response.ok) {
         throw new Error("Error during sign out!");
     }
+}
+
+export const addMyHotel = async (hotelFormData: FormData) => {
+    const response = await fetch(`${API_BASE_URL}/my-hotels`, {
+        method: "POST",
+        credentials: "include", //deal with http cookies on sending the request or on getting the response
+        body: hotelFormData
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        if (Array.isArray(data.message)) {
+            throw new Error(data.message[0].msg)
+        } else {
+            throw new Error(data.message)
+        }
+    }
+    return data;
+}
+
+export const fetchMyHotels = async (): Promise<HotelType[]> => {
+    const response = await fetch(`${API_BASE_URL}/my-hotels`, {
+        method: "GET",
+        credentials: "include", //deal with http cookies on sending the request or on getting the response
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message)
+    }
+
+    return data;
+}
+
+export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
+    const response = await fetch(`${API_BASE_URL}/my-hotels/${hotelId}`, {
+        method: "GET",
+        credentials: "include", //deal with http cookies on sending the request or on getting the response
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message)
+    }
+
+    return data;
+}
+
+export const updateMyHotelById = async (hotelFormData: FormData): Promise<HotelType> => {
+    const response = await fetch(`${API_BASE_URL}/my-hotels/${hotelFormData.get("")}`, {
+        method: "GET",
+        credentials: "include", //deal with http cookies on sending the request or on getting the response
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message)
+    }
+
+    return data;
 }

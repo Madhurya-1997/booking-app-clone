@@ -37,12 +37,11 @@ const Register = () => {
             <h2 className="text-3xl font-bold">Create an Account</h2>
 
             <div className="flex flex-col md:flex-row gap-5">
-                <label htmlFor="firstName" className="text-gray-700 font-bold text-sm flex-1">
+                <label className="text-gray-700 font-bold text-sm flex-1">
                     First Name
                     <input
-                        id="firstName"
                         type="text"
-                        className="border border-b-blue-800 border-t-white border-l-white border-r-white focus:outline-none rounded w-full py-1 px-2 font-normal"
+                        className="border border-b-blue-300 border-t-white border-l-white border-r-white focus:outline-none rounded w-full py-1 px-2 font-normal"
                         {...register("firstName",
                             {
                                 required: "This field is required",
@@ -57,12 +56,11 @@ const Register = () => {
                     )}
                 </label>
 
-                <label htmlFor="lastName" className="text-gray-700 font-bold text-sm flex-1">
+                <label className="text-gray-700 font-bold text-sm flex-1">
                     Last Name
                     <input
-                        id="lastName"
                         type="text"
-                        className="border border-b-blue-800 border-t-white border-l-white border-r-white focus:outline-none rounded w-full py-1 px-2 font-normal"
+                        className="border border-b-blue-300 border-t-white border-l-white border-r-white focus:outline-none rounded w-full py-1 px-2 font-normal"
                         {...register("lastName",
                             {
                                 required: "This field is required",
@@ -79,12 +77,11 @@ const Register = () => {
             </div>
 
 
-            <label htmlFor="email" className="text-gray-700 font-bold text-sm flex-1">
+            <label className="text-gray-700 font-bold text-sm flex-1">
                 Email
                 <input
-                    id="email"
                     type="email"
-                    className="border border-b-blue-800 border-t-white border-l-white border-r-white focus:outline-none rounded w-full py-1 px-2 font-normal"
+                    className="border border-b-blue-300 border-t-white border-l-white border-r-white focus:outline-none rounded w-full py-1 px-2 font-normal"
                     {...register("email",
                         {
                             required: "This field is required",
@@ -97,12 +94,11 @@ const Register = () => {
 
 
 
-            <label htmlFor="password" className="text-gray-700 font-bold text-sm flex-1">
+            <label className="text-gray-700 font-bold text-sm flex-1">
                 Password
                 <input
-                    id="password"
                     type="password"
-                    className="border border-b-blue-800 border-t-white border-l-white border-r-white focus:outline-none rounded w-full py-1 px-2 font-normal"
+                    className="border border-b-blue-300 border-t-white border-l-white border-r-white focus:outline-none rounded w-full py-1 px-2 font-normal"
                     {...register("password",
                         {
                             required: "This field is required",
@@ -119,12 +115,11 @@ const Register = () => {
 
 
 
-            <label htmlFor="confirmPassword" className="text-gray-700 font-bold text-sm flex-1">
+            <label className="text-gray-700 font-bold text-sm flex-1">
                 Confirm Password
                 <input
-                    id="confirmPassword"
                     type="password"
-                    className="border border-b-blue-800 border-t-white border-l-white border-r-white focus:outline-none rounded w-full py-1 px-2 font-normal"
+                    className="border border-b-blue-300 border-t-white border-l-white border-r-white focus:outline-none rounded w-full py-1 px-2 font-normal"
                     {...register("confirmPassword",
                         {
                             validate: (value: string) => {

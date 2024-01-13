@@ -33,12 +33,11 @@ const SignIn = () => {
     <form className="flex flex-col gap-5" onSubmit={login}>
       <h2 className="text-3xl font-bold">Login to your Account</h2>
 
-      <label htmlFor="email" className="text-gray-700 font-bold text-sm flex-1">
+      <label className="text-gray-700 font-bold text-sm flex-1">
         Email
         <input
-          id="email"
           type="email"
-          className="border border-b-blue-800 border-t-white border-l-white border-r-white focus:outline-none rounded w-full py-1 px-2 font-normal"
+          className="border border-b-blue-300 border-t-white border-l-white border-r-white focus:outline-none rounded w-full py-1 px-2 font-normal"
           {...register("email",
             {
               required: "This field is required",
@@ -51,12 +50,11 @@ const SignIn = () => {
 
 
 
-      <label htmlFor="password" className="text-gray-700 font-bold text-sm flex-1">
+      <label className="text-gray-700 font-bold text-sm flex-1">
         Password
         <input
-          id="password"
           type="password"
-          className="border border-b-blue-800 border-t-white border-l-white border-r-white focus:outline-none rounded w-full py-1 px-2 font-normal"
+          className="border border-b-blue-300 border-t-white border-l-white border-r-white focus:outline-none rounded w-full py-1 px-2 font-normal"
           {...register("password",
             {
               required: "This field is required",
