@@ -83,7 +83,7 @@ export const logout = async () => {
 export const addMyHotel = async (hotelFormData: FormData) => {
     const response = await fetch(`${API_BASE_URL}/my-hotels`, {
         method: "POST",
-        credentials: "include", //deal with http cookies on sending the request or on getting the response
+        credentials: "include",
         body: hotelFormData
     });
 
@@ -102,7 +102,7 @@ export const addMyHotel = async (hotelFormData: FormData) => {
 export const fetchMyHotels = async (): Promise<HotelType[]> => {
     const response = await fetch(`${API_BASE_URL}/my-hotels`, {
         method: "GET",
-        credentials: "include", //deal with http cookies on sending the request or on getting the response
+        credentials: "include",
     });
 
     const data = await response.json();
@@ -116,7 +116,7 @@ export const fetchMyHotels = async (): Promise<HotelType[]> => {
 export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
     const response = await fetch(`${API_BASE_URL}/my-hotels/${hotelId}`, {
         method: "GET",
-        credentials: "include", //deal with http cookies on sending the request or on getting the response
+        credentials: "include",
     });
 
     const data = await response.json();
@@ -128,9 +128,10 @@ export const fetchMyHotelById = async (hotelId: string): Promise<HotelType> => {
 }
 
 export const updateMyHotelById = async (hotelFormData: FormData): Promise<HotelType> => {
-    const response = await fetch(`${API_BASE_URL}/my-hotels/${hotelFormData.get("")}`, {
-        method: "GET",
-        credentials: "include", //deal with http cookies on sending the request or on getting the response
+    const response = await fetch(`${API_BASE_URL}/my-hotels/${hotelFormData.get("hotelId")}`, {
+        method: "PUT",
+        credentials: "include",
+        body: hotelFormData
     });
 
     const data = await response.json();

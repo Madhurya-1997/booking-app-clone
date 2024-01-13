@@ -38,6 +38,13 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
 
     const createNewHotel = handleSubmit((data: HotelFormData) => {
         const hotelFormData = new FormData();
+
+        // if hotel already exists, i.e., edit hotel form
+        if (hotel) {
+            hotelFormData.append("hotelId", hotel._id);
+        }
+
+
         hotelFormData.append("name", data.name);
         hotelFormData.append("city", data.city);
         hotelFormData.append("country", data.country);
@@ -54,9 +61,15 @@ const ManageHotelForm = ({ onSave, isLoading, hotel }: Props) => {
 
         Array.from(data.imageFiles).forEach((imgFile) => {
             hotelFormData.append(`imageFiles`, imgFile);
-        })
+        });
 
-        console.log("Hotel form data: ", hotelFormData);
+        // in edit mode
+        if (data.imageUrls && data.imageUrls.length > 0) {
+            data.imageUrls.forEach((imgUrl, _idx) => {
+                hotelFormData.append(`imageUrls[${_idx}]`, imgUrl);
+            })
+        }
+
 
         onSave(hotelFormData);
     });
