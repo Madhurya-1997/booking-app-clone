@@ -1,3 +1,4 @@
+import { HotelSearchResponse, SearchParams } from "./types/HotelSearchResponse";
 import { HotelType } from "./types/HotelType";
 import { LoginFormData } from "./types/LoginFormData";
 import { RegisterFormData } from "./types/RegisterFormData"
@@ -133,6 +134,34 @@ export const updateMyHotelById = async (hotelFormData: FormData): Promise<HotelT
         credentials: "include",
         body: hotelFormData
     });
+
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message)
+    }
+
+    return data;
+}
+
+export const searchHotels = async ({
+    destination,
+    checkIn,
+    checkOut,
+    adultCount,
+    childCount,
+    page
+}: SearchParams): Promise<HotelSearchResponse> => {
+
+    const queryParams = new URLSearchParams();
+    queryParams.append("destination", destination || "");
+    queryParams.append("checkIn", checkIn || "");
+    queryParams.append("checkOut", checkOut || "");
+    queryParams.append("adultCount", adultCount || "");
+    queryParams.append("childCount", childCount || "");
+    queryParams.append("page", page || "");
+
+
+    const response = await fetch(`${API_BASE_URL}/hotels/search?${queryParams}`);
 
     const data = await response.json();
     if (!response.ok) {

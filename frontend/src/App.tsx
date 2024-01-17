@@ -11,6 +11,8 @@ import AddHotel from "./pages/AddHotel";
 import { useAppContext } from "./contexts/AppContext";
 import MyHotels from "./pages/MyHotels";
 import EditHotel from "./pages/EditHotel";
+import Search from "./pages/Search";
+import HotelDetails from "./pages/HotelDetails";
 
 
 function App() {
@@ -25,7 +27,7 @@ function App() {
         } />
         <Route path='/search' element={
           <Layout>
-            <p>Search page</p>
+            <Search />
           </Layout>
         } />
         <Route path='/register' element={
@@ -36,6 +38,11 @@ function App() {
         <Route path='/sign-in' element={
           <Layout>
             <SignIn />
+          </Layout>
+        } />
+        <Route path='/details/:id' element={
+          <Layout>
+            <HotelDetails />
           </Layout>
         } />
 
