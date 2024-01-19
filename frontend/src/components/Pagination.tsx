@@ -2,16 +2,18 @@ type PaginationProps = {
     page: number;
     pages: number;
     onPageChange: (page: number) => void;
+    hotels: number | undefined;
 }
 
 const Pagination = ({
     page,
     pages,
-    onPageChange
+    onPageChange,
+    hotels
 }: PaginationProps) => {
 
     const pageNumbers = [];
-    for (let i = 1; i <= pages; i++) {
+    for (let i = 1; i <= pages && hotels && hotels > 0; i++) {
         pageNumbers.push(i);
     }
 
