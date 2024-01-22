@@ -7,7 +7,7 @@ import { RegisterFormData } from "./types/RegisterFormData"
 import { UserType } from "./types/UserType";
 
 // const API_BASE_URL = import.meta.env.API_SERVER_URI || "http://localhost:8081/api";
-const API_BASE_URL = "https://booking-clone-backend-w2jw.onrender.com/"
+const API_BASE_URL = "https://booking-clone-backend-w2jw.onrender.com/api"
 
 export const fetchCurrentUser = async (): Promise<UserType> => {
     const response = await fetch(`${API_BASE_URL}/users/me`, {
