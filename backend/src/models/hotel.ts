@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { HotelType } from "../shared/types";
+import { BookingType, HotelType } from "../shared/types";
+import { bookingSchema } from "./bookings";
 
 const hotelSchema = new mongoose.Schema<HotelType>({
     userId: {
@@ -54,6 +55,7 @@ const hotelSchema = new mongoose.Schema<HotelType>({
         type: Date,
         required: true
     },
+    bookings: [bookingSchema]
 });
 
 const Hotel = mongoose.model<HotelType>("Hotel", hotelSchema);

@@ -7,6 +7,7 @@ import authRoutes from "./routes/auth";
 import cookieParser from "cookie-parser";
 import { v2 as cloudinary } from "cloudinary";
 import myHotelRoutes from "./routes/my-hotels";
+import myBookingRoutes from "./routes/my-bookings";
 import hotelRoutes from "./routes/hotels";
 
 cloudinary.config({
@@ -32,6 +33,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/my-hotels", myHotelRoutes);
 app.use("/api/hotels", hotelRoutes);
+app.use("/api/my-bookings", myBookingRoutes);
 
 app.get("*", (req: Request, res: Response) => {
     res.send("Error from server !!!");

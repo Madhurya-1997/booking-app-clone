@@ -1,3 +1,5 @@
+import { BookingType } from "./BookingType";
+
 export type HotelType = {
     _id: string;
     userId: string;
@@ -13,4 +15,5 @@ export type HotelType = {
     starRating: number;
     imageUrls: string[];
     lastUpdated: Date;
+    bookings: BookingType[];
 };

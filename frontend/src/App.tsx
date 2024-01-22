@@ -7,6 +7,7 @@ import {
 import Layout from "./layouts/Layout";
 import Register from "./pages/Register";
 import SignIn from "./pages/SignIn";
+import Home from "./pages/Home";
 import AddHotel from "./pages/AddHotel";
 import MyHotels from "./pages/MyHotels";
 import EditHotel from "./pages/EditHotel";
@@ -14,6 +15,7 @@ import Search from "./pages/Search";
 import HotelDetails from "./pages/HotelDetails";
 import { useAppContext } from "./hooks/useAppContext";
 import Booking from "./pages/Booking";
+import MyBookings from "./pages/MyBookings";
 
 
 function App() {
@@ -23,7 +25,7 @@ function App() {
       <Routes>
         <Route path='/' element={
           <Layout>
-            <p>Home page</p>
+            <Home />
           </Layout>
         } />
         <Route path='/search' element={
@@ -62,6 +64,15 @@ function App() {
               </Layout>
 
             } />
+
+            <Route
+              path="/my-bookings"
+              element={
+                <Layout>
+                  <MyBookings />
+                </Layout>
+              }
+            />
 
             <Route path="/hotel/:hotelId/booking" element={
               <Layout>
