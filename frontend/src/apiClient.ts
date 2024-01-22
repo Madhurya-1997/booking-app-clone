@@ -2,8 +2,21 @@ import { HotelSearchResponse, SearchParams } from "./types/HotelSearchResponse";
 import { HotelType } from "./types/HotelType";
 import { LoginFormData } from "./types/LoginFormData";
 import { RegisterFormData } from "./types/RegisterFormData"
+import { UserType } from "./types/UserType";
 
 const API_BASE_URL = "http://localhost:8081/api" || '';
+
+export const fetchCurrentUser = async (): Promise<UserType> => {
+    const response = await fetch(`${API_BASE_URL}/users/me`, {
+        credentials: "include"
+    });
+
+    if (!response.ok) {
+        throw new Error("Error fetching user");
+    }
+
+    return await response.json();
+}
 
 export const register = async (req: RegisterFormData) => {
     const response = await fetch(`${API_BASE_URL}/users/register`, {
@@ -175,6 +188,17 @@ export const searchHotels = async ({
 
 
     const response = await fetch(`${API_BASE_URL}/hotels/search?${queryParams}`);
+
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message)
+    }
+
+    return data;
+}
+
+export const fetchHotelById = async (hotelId: string): Promise<HotelType> => {
+    const response = await fetch(`${API_BASE_URL}/hotels/${hotelId}`);
 
     const data = await response.json();
     if (!response.ok) {

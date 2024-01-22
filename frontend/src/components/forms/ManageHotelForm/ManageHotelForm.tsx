@@ -4,7 +4,7 @@ import TypeSection from './TypeSection';
 import FacilitiesSection from './FacilitiesSection';
 import GuestSection from './GuestSection';
 import ImageSection from './ImageSection';
-import { HotelType } from '../../types/HotelType';
+import { HotelType } from '../../../types/HotelType';
 import { useEffect } from 'react';
 
 interface Props {

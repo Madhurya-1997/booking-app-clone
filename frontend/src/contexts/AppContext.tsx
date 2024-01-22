@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useState } from "react";
+import { ReactNode, createContext, useState } from "react";
 import Toast from "../components/Toast";
 import { useQuery } from "react-query";
 import * as apiClient from "../apiClient";
@@ -8,12 +8,12 @@ type ToastMessage = {
     type: "SUCCESS" | "ERROR"
 }
 
-type AppContext = {
+export type AppContext = {
     showToast: (toastMessage: ToastMessage) => void;
     isLoggedIn: boolean;
 }
 
-const AppContext = createContext<AppContext | undefined>(undefined);
+export const AppContext = createContext<AppContext | undefined>(undefined);
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     const [toast, setToast] = useState<ToastMessage | undefined>(undefined);
@@ -38,9 +38,4 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
             {children}
         </AppContext.Provider>
     )
-}
-
-export const useAppContext = () => {
-    const context = useContext(AppContext);
-    return context as AppContext;
 }

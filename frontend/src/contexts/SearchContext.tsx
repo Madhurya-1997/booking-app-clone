@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, createContext, useContext, useReducer } from "react";
+import { Dispatch, ReactNode, createContext, useReducer } from "react";
 
 type SearchContext = {
     state: Search,
@@ -20,17 +20,24 @@ type SearchAction = {
 }
 
 const initialSearchState: Search = {
-    destination: "",
-    checkIn: new Date(),
-    checkOut: new Date(),
-    adultCount: 1,
-    childCount: 1,
-    hotelId: ""
+    destination: sessionStorage.getItem("destination") || "",
+    checkIn: new Date(sessionStorage.getItem("checkIn") || new Date()),
+    checkOut: new Date(sessionStorage.getItem("checkOut") || new Date()),
+    adultCount: parseInt(sessionStorage.getItem("adultCount") || "1"),
+    childCount: parseInt(sessionStorage.getItem("childCount") || "1"),
+    hotelId: sessionStorage.getItem("hotelId") || ""
 }
 
 const searchReducer = (state: Search, action: SearchAction) => {
     switch (action.type) {
         case "SAVE_SEARCH_VALUES":
+            sessionStorage.setItem("destination", action.payload.destination);
+            sessionStorage.setItem("checkIn", action.payload.checkIn.toISOString());
+            sessionStorage.setItem("checkOut", action.payload.checkOut.toISOString());
+            sessionStorage.setItem("adultCount", action.payload.adultCount.toString());
+            sessionStorage.setItem("childCount", action.payload.childCount.toString());
+            sessionStorage.setItem("hotelId", (action.payload?.hotelId || ""));
+
             return {
                 ...state, ...{
                     destination: action.payload.destination,
@@ -60,9 +67,4 @@ export const SearchContextProvider = ({ children }: { children: ReactNode }) => 
         <SearchContext.Provider value={{ state, dispatch }}>{children}
         </SearchContext.Provider>
     )
-}
-
-export const useSearchContext = () => {
-    const context = useContext(SearchContext);
-    return context;
 }

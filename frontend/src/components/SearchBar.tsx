@@ -1,10 +1,9 @@
 import { MdTravelExplore } from "react-icons/md";
-import { FaCalendarAlt } from "react-icons/fa";
-import { useSearchContext } from "../contexts/SearchContext"
 import { FormEvent, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useNavigate } from "react-router-dom";
+import { useSearchContext } from "../hooks/useSearchContext";
 
 
 const SearchBar = () => {

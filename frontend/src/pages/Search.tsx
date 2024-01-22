@@ -1,4 +1,3 @@
-import { useSearchContext } from '../contexts/SearchContext'
 import * as apiClient from "../apiClient";
 import { useQuery } from 'react-query';
 import { useState } from 'react';
@@ -9,6 +8,7 @@ import StarRatingFilter from '../components/StarRatingFilter';
 import HotelTypesFilter from '../components/HotelTypesFilter';
 import FacilitiesFilter from '../components/FacilitiesFilter';
 import PriceFilter from '../components/PriceFilter';
+import { useSearchContext } from "../hooks/useSearchContext";
 
 const Search = () => {
     const { state: searchValues } = useSearchContext();
@@ -26,12 +26,12 @@ const Search = () => {
         checkOut: searchValues.checkOut.toISOString(),
         adultCount: searchValues.adultCount.toString(),
         childCount: searchValues.childCount.toString(),
+        page: page.toString(),
         stars: selectedStars,
         types: hotelTypes,
         facilities: facilities,
         maxPrice: maxHotelPrice?.toString(),
-        sortOption,
-        page: page.toString()
+        sortOption
     }
 
     const { data: hotelData } = useQuery(

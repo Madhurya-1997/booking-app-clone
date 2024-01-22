@@ -1,7 +1,7 @@
-import ManageHotelForm from '../components/forms/ManageHotelForm'
+import ManageHotelForm from '../components/forms/ManageHotelForm/ManageHotelForm'
 import { useMutation } from 'react-query';
 import * as apiClient from "../apiClient";
-import { useAppContext } from '../contexts/AppContext';
+import { useAppContext } from '../hooks/useAppContext';
 
 const AddHotel = () => {
     const { showToast } = useAppContext();

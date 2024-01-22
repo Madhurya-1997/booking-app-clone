@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "react-query"
 import * as apiClient from "../apiClient";
-import { useAppContext } from "../contexts/AppContext";
+import { useAppContext } from "../hooks/useAppContext";
 
 const SignOutButton = () => {
     const queryClient = useQueryClient();

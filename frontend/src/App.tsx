@@ -8,11 +8,12 @@ import Layout from "./layouts/Layout";
 import Register from "./pages/Register";
 import SignIn from "./pages/SignIn";
 import AddHotel from "./pages/AddHotel";
-import { useAppContext } from "./contexts/AppContext";
 import MyHotels from "./pages/MyHotels";
 import EditHotel from "./pages/EditHotel";
 import Search from "./pages/Search";
 import HotelDetails from "./pages/HotelDetails";
+import { useAppContext } from "./hooks/useAppContext";
+import Booking from "./pages/Booking";
 
 
 function App() {
@@ -58,6 +59,13 @@ function App() {
             <Route path="my-hotels" element={
               <Layout>
                 <MyHotels />
+              </Layout>
+
+            } />
+
+            <Route path="/hotel/:hotelId/booking" element={
+              <Layout>
+                <Booking />
               </Layout>
 
             } />
