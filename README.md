@@ -1,4 +1,5 @@
 ## Booking App Clone
+Check out the Live application [Booking App](https://booking-clone-frontend.onrender.com/)
 
 ### Currently in development phase
 
@@ -17,3 +18,4 @@ docker-compose up
 ```
 
 Open [http://localhost:5173](http://localhost:5173) with your browser to see the result.
+
